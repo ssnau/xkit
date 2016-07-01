@@ -1,4 +1,6 @@
-A set of functions without any dependencies.
+A set of functions __without any dependencies__.
+
+Notice: the primary goal I made this repo is to build small things without any shitty npm dependencies. If I have to depend on them, I just copied.
 
 fs
 ----
