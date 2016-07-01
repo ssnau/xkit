@@ -37,12 +37,7 @@ app.use(routes);
 
 Now you must know how easy it is. Basically, there 4 fields for you to configuare with:
 
-- url:
-- method/methods:
-- middleware/middlewares:
-- controller: the handler function  Basically, there 4 fields for you to configuare with:
-
-  - url: the url to be matching
-  - method/methods: the http method to be matching
-  - middleware/middlewares: process with middlewares before hitting the match route
-  - controller: the handler function 
+- url: the url to be matching
+- method/methods: the http method to be matching
+- middleware/middlewares: process with middlewares before hitting the match route
+- controller: the handler function 
