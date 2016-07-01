@@ -3,9 +3,9 @@ xkit - koa utilities
 
 ## router
 
-`xkit/koa/router` is an very simple router generator. Example talks.
+`xkit/koa/router` is a very simple router generator. Example talks.
 
-```
+```javascript
 var app = require('koa')();
 var router = require('xkit/koa/router');
 
