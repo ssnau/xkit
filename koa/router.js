@@ -2,10 +2,8 @@ var routington = require('../util/routington');
 module.exports = function (pages) {
   pages = [].concat(pages);
   var router = getRouter(pages);
-  console.log(router);
   return function *(next) {
     var match = router.match(this.path);
-    console.log('path is', this.path);
     var controllers = match && match.node && match.node.controllers;
     if (!controllers) {
       this.body = 'no route found';
