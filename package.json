@@ -9,8 +9,10 @@
   "keywords": [],
   "author": "",
   "license": "ISC",
-  "dependencies": {
+  "devDependencies": {
     "co": "^4.6.0",
-    "mocha": "^2.5.3"
+    "mocha": "^2.5.3",
+    "koa": "^1.2.0",
+    "should": "^9.0.2"
   }
 }
