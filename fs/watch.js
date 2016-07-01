@@ -2,12 +2,12 @@ var fs = require('fs');
 var path = require('path');
 
 /**
-   * 给定配置, 监控一个文件的变化.
+   * watch a folder with given configuration.
    *
-   * path: 要watch的目录.
-   * pattern: 一个RegExp或函数,或以它们组成的数组,过滤要监控的内容.
-   * callback: 检测到变化时的回调.
-   * watcherName: 这个watcher的名字,通常用于打log调试.
+   * path: directory to watch
+   * pattern: RegExp or Function to filter the files you concern.
+   * callback: callbacks when files changed.
+   * watcherName: the name of your watcher.
    *
    */
 function watch(config) {
