@@ -4,6 +4,12 @@ var router = require('../router');
 var app = koa();
 app.use(router([
   {
+    url: "/",
+    controller: function* () {
+      this.body = "hello, world";
+    }
+  },
+  {
     url: "/hello/mama",
     controller: function* () {
       this.body = "hello";
