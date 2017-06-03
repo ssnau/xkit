@@ -10,7 +10,10 @@ function startWith(a, b) {
   return a.indexOf(b) === 0;
 }
 function endWith(a, b) {
-  return a.indexOf(b) == (a.length - b.length);
+  const len = a.length;
+  if (b.length > a.length) return false;
+  if (b.length === a.length && a !== b) return false;
+  return a.slice(a.length - b.length) === b;
 }
 /**
  * get the overlapped part of the provided two string.
