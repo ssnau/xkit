@@ -18,6 +18,7 @@ describe('#replace', () => {
   it('should replace file', () => {
     replace({
       dir: path.resolve(xpath, '..'),
+      pattern: /copy/,
       callback: (content) => {
         return content.replace('jack', 'tom');
       }
@@ -28,7 +29,23 @@ describe('#replace', () => {
       content1.replace('jack', 'tom'),
       content2
     );
+  });
 
+  it('should not replace if return non-string', () => {
+    replace({
+      dir: path.resolve(xpath, '..'),
+      pattern: /copy/,
+      callback: (content) => { return; }
+    });
 
+    replace({
+      dir: path.resolve(xpath, '..'),
+      pattern: /copy/,
+      callback: (content) => { return false; }
+    });
+
+    const content1 = fs.readFileSync(xpath, 'utf8');
+    const content2 = fs.readFileSync(xCopyPath, 'utf8');
+    assert.equal(content1, content2);
   });
 });
