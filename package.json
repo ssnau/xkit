@@ -4,7 +4,7 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "test": "mocha ./**/_test/*.spec.js",
+    "test": "mocha ./src/**/_test/*.spec.js",
     "build": "buble src -o . --no generator"
   },
   "keywords": [],
