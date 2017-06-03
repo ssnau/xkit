@@ -1,12 +1,12 @@
-var string = require('../string');
-var assert = require('assert');
+const string = require('../string');
+const assert = require('assert');
 
-it('startWith', function () {
+it('startWith', () => {
   assert.ok(string.startWith('abc', 'a'));
   assert.ok(string.startWith('abc', 'ab'));
 });
 
-it('endWith', function () {
+it('endWith', () => {
   assert.ok(string.endWith('abc', 'c'));
   assert.ok(string.endWith('abc', 'bc'));
   assert.ok(string.endWith('/abc/b/', '/'));

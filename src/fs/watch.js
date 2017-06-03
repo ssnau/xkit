@@ -26,7 +26,7 @@ function watch(config) {
     return;
   }
   fs.watch(dir, {recursive: true, persistent: true},  function (event, filename) {
-    if (!check(filename)) { return; }
+    if (!check(filename)) return;
     console.log('watcher [' + watcherName + '] changed:', filename);
     try {
       callback.apply(this, [filename]);

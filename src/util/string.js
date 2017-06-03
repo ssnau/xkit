@@ -1,18 +1,18 @@
 module.exports = {
-  startWith: startWith,
-  endWith: endWith,
-  getOverlap: getOverlap,
-  isOverlapBy: isOverlapBy,
-  splitBetween: splitBetween,
+  startWith,
+  endWith,
+  getOverlap,
+  isOverlapBy,
+  splitBetween,
 };
 
 function startWith(a, b) {
   return a.indexOf(b) === 0;
 }
 function endWith(a, b) {
-  var len = a.length;
-  if (b.length > a.length) { return false; }
-  if (b.length === a.length && a !== b) { return false; }
+  const len = a.length;
+  if (b.length > a.length) return false;
+  if (b.length === a.length && a !== b) return false;
   return a.slice(a.length - b.length) === b;
 }
 /**
@@ -28,7 +28,7 @@ function getOverlap(a, b) {
 
   for (var i = len; i > 0; i--) {
     var needle = b.slice(0, i);
-    if (isOverlapBy(a, b, needle)) { return needle; }
+    if (isOverlapBy(a, b, needle)) return needle;
   }
   return '';
 }
@@ -44,9 +44,9 @@ function isOverlapBy(a, b, needle) {
  */
 function splitBetween(s, start, end) {
   var sindex = s.indexOf(start);
-  if (sindex === -1) { return ''; }
+  if (sindex === -1) return '';
   var eindex = s.indexOf(end);
-  if (eindex === -1) { return ''; }
+  if (eindex === -1) return '';
   return {
     left: s.slice(0, sindex),
     middle: s.slice(sindex + start.length, eindex),

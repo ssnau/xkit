@@ -20,6 +20,7 @@ app.use(router([
     controller: function* () {
       this.body = "hello, " + this.params.id;
     }
-  } ]));
+  },
+]));
 
 app.listen(9898);

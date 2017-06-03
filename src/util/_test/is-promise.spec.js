@@ -8,7 +8,7 @@ it('should detect promise', co.wrap(function*() {
 
   var p = Promise.reject(1);
   assert.ok(isPromise(p));
-  p.catch(function () {}); // supress warning
+  p.catch(() => {}); // supress warning
 
   assert.ok(!isPromise({}));
   assert.ok(!isPromise(1));

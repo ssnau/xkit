@@ -1,9 +1,9 @@
-const readdirSync = require('../readdir');
-const path = require('path');
-const assert = require('assert');
+var readdirSync = require('../readdir');
+var path = require('path');
+var assert = require('assert');
 
-it('should read file', () => {
-  const files = readdirSync(path.join(__dirname, 'assets'));
+it('should read file', function () {
+  var files = readdirSync(path.join(__dirname, 'assets'));
   assert.deepEqual(files,
    [
      path.join(__dirname, 'assets/a/x'),

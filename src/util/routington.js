@@ -6,7 +6,7 @@ function flatten(array) {
 }
 
 Routington.prototype.define = function (route) {
-  if (typeof route !== 'string') { throw new TypeError('Only strings can be defined.') }
+  if (typeof route !== 'string') throw new TypeError('Only strings can be defined.')
 
   try {
     return Define(route.split('/'), this)
@@ -50,7 +50,7 @@ function Define(frags, root) {
 
 Routington.parse = function (string) {
   var options = Parse(string)
-  if(!options) { throw new Error('Invalid parsed string: ' + string) }
+  if(!options) throw new Error('Invalid parsed string: ' + string)
   return options
 }
 
@@ -82,17 +82,17 @@ function Parse(string) {
   })
 
   // Return if the string is now empty
-  if (!string) { return options }
+  if (!string) return options
 
   // Assume the capture is a regex if there are
   // non-word characters in the capture.
   if (/^\(.+\)$/.test(string) && (string = string.slice(1, -1))) {
     if (isPipeSeparatedString(string))
-      { string.split('|').filter(function (x) {
+      string.split('|').filter(function (x) {
         options.string[x] = true
-      }) }
+      })
     else
-      { options.regex = string }
+      options.regex = string
 
     return options
   }
@@ -121,13 +121,13 @@ Routington.prototype.match = function (url) {
   top:
   while (length) {
     frag = decode(frags.shift())
-    if (frag === -1) { throw new Error('malformed url: ' + url); }
+    if (frag === -1) throw new Error('malformed url: ' + url);
     // assert(frag !== -1, 404, 'malformed url: ' + url)
     length = frags.length
 
     // Check by name
     if (node = root.child[frag]) {
-      if (name = node.name) { match.param[name] = frag }
+      if (name = node.name) match.param[name] = frag
 
       if (!length) {
         match.node = node
@@ -144,7 +144,7 @@ Routington.prototype.match = function (url) {
       node = nodes[i]
 
       if (!(regex = node.regex) || regex.test(frag)) {
-        if (name = node.name) { match.param[name] = frag }
+        if (name = node.name) match.param[name] = frag
 
         if (!length) {
           match.node = node
@@ -178,7 +178,7 @@ function decode(string) {
 }
 
 function Routington(options) {
-  if (!(this instanceof Routington)) { return new Routington(options) }
+  if (!(this instanceof Routington)) return new Routington(options)
 
   this._init(options)
 }
@@ -191,14 +191,14 @@ Routington.prototype._init = function (options) {
   this.name = options.name || ''
 
   if (typeof options.string === 'string')
-    { this.string = options.string }
+    this.string = options.string
   else if (typeof options.regex === 'string')
-    { this.regex = new RegExp(
+    this.regex = new RegExp(
       '^(' + options.regex + ')$',
       options.flag == null ? 'i' : options.flag
-    ) }
+    )
   else if (options.regex instanceof RegExp)
-    { this.regex = options.regex }
+    this.regex = options.regex
 }
 
 // Find || (create && attach) a child node
@@ -210,7 +210,7 @@ Routington.prototype._add = function (options) {
 // Find a child node based on a bunch of options
 Routington.prototype._find = function (options) {
   // Find by string
-  if (typeof options.string === 'string') { return this.child[options.string] }
+  if (typeof options.string === 'string') return this.child[options.string]
 
   var child
   var children = this.children
@@ -218,19 +218,19 @@ Routington.prototype._find = function (options) {
 
   // Find by name
   if (options.name)
-    { for (var j = 0; j < l; j++)
-      { if ((child = children[j]).name === options.name)
-        { return child } } }
+    for (var j = 0; j < l; j++)
+      if ((child = children[j]).name === options.name)
+        return child
 }
 
 // Attach a node to this node
 Routington.prototype._attach = function (node) {
-  if (!(node instanceof Routington)) { node = new Routington(node) }
+  if (!(node instanceof Routington)) node = new Routington(node)
 
   node.parent = this
 
-  if (node.string == null) { this.children.push(node) }
-  else { this.child[node.string] = node }
+  if (node.string == null) this.children.push(node)
+  else this.child[node.string] = node
 
   return node
 }

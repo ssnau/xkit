@@ -29,17 +29,17 @@ function spawn(command, options) {
         $silent  = options.$silent || true,
         onData   = options.onData || noop;
     var out = '';
-    var cmd = {resolve: resolve, reject: reject};
+    var cmd = {resolve, reject};
     var child = require('child_process').spawn('sh', ['-c', command]);
     child.stdout.on('data', function (buf) {
       var string = String(buf);
-      if ($through) { process.stdout.write(string); }
+      if ($through) process.stdout.write(string);
       out += string;
       onData(string);
     });
     child.stderr.on('data', function (buf) {
       var string = String(buf);
-      if ($through) { process.stdout.write(string); }
+      if ($through) process.stdout.write(string);
       out += string;
       onData(string);
     });
@@ -48,7 +48,7 @@ function spawn(command, options) {
       child.stdin.end();
       child.stdout.destroy();
       child.stderr.destroy();
-      cmd[hasError ? 'reject' : 'resolve']({code: code, out: out});
+      cmd[hasError ? 'reject' : 'resolve']({code, out});
     });
   });
 }

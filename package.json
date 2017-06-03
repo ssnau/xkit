@@ -4,15 +4,17 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "test": "mocha ./**/_test/*.spec.js"
+    "test": "mocha ./**/_test/*.spec.js",
+    "build": "buble src -o . --no generator"
   },
   "keywords": [],
   "author": "",
   "license": "ISC",
   "devDependencies": {
+    "buble": "^0.15.2",
     "co": "^4.6.0",
-    "mocha": "^2.5.3",
     "koa": "^1.2.0",
+    "mocha": "^2.5.3",
     "should": "^9.0.2"
   }
 }

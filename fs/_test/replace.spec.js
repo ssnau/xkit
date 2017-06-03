@@ -1,51 +1,51 @@
-const assert = require('assert');
-const replace = require('../replace');
-const execSync = require('child_process').execSync;
-const path = require('path');
-const fs = require('fs');
-const xpath = path.join(__dirname, 'assets/a/x');
-const xCopyPath = path.join(__dirname, 'assets/a/x.copy');
+var assert = require('assert');
+var replace = require('../replace');
+var execSync = require('child_process').execSync;
+var path = require('path');
+var fs = require('fs');
+var xpath = path.join(__dirname, 'assets/a/x');
+var xCopyPath = path.join(__dirname, 'assets/a/x.copy');
 
-describe('#replace', () => {
-  beforeEach(() => {
-    execSync(`cp ${xpath} ${xCopyPath}`);
+describe('#replace', function () {
+  beforeEach(function () {
+    execSync(("cp " + xpath + " " + xCopyPath));
   });
 
-  afterEach(() => {
-    execSync(`rm ${xCopyPath}`);
+  afterEach(function () {
+    execSync(("rm " + xCopyPath));
   });
 
-  it('should replace file', () => {
+  it('should replace file', function () {
     replace({
       dir: path.resolve(xpath, '..'),
       pattern: /copy/,
-      callback: (content) => {
+      callback: function (content) {
         return content.replace('jack', 'tom');
       }
     });
-    const content1 = fs.readFileSync(xpath, 'utf8');
-    const content2 = fs.readFileSync(xCopyPath, 'utf8');
+    var content1 = fs.readFileSync(xpath, 'utf8');
+    var content2 = fs.readFileSync(xCopyPath, 'utf8');
     assert.equal(
       content1.replace('jack', 'tom'),
       content2
     );
   });
 
-  it('should not replace if return non-string', () => {
+  it('should not replace if return non-string', function () {
     replace({
       dir: path.resolve(xpath, '..'),
       pattern: /copy/,
-      callback: (content) => { return; }
+      callback: function (content) { return; }
     });
 
     replace({
       dir: path.resolve(xpath, '..'),
       pattern: /copy/,
-      callback: (content) => { return false; }
+      callback: function (content) { return false; }
     });
 
-    const content1 = fs.readFileSync(xpath, 'utf8');
-    const content2 = fs.readFileSync(xCopyPath, 'utf8');
+    var content1 = fs.readFileSync(xpath, 'utf8');
+    var content2 = fs.readFileSync(xCopyPath, 'utf8');
     assert.equal(content1, content2);
   });
 });
