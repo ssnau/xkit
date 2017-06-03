@@ -3,7 +3,7 @@ const assert = require('assert');
 
 it('should splitBetween', function () {
   assert.deepEqual(
-    string.splitBetween('abc[eb]ff', '[', ']'),
-     {left: 'abc', middle: 'eb', right: 'ff'}
+    string.splitBetween('abc[eb]ff', '[e', ']'),
+     {left: 'abc', middle: 'b', right: 'ff'}
    );
 });

@@ -46,7 +46,7 @@ function splitBetween(s, start, end) {
   if (eindex === -1) return '';
   return {
     left: s.slice(0, sindex),
-    middle: s.slice(sindex + 1, eindex),
-    right: s.slice(eindex + 1),
+    middle: s.slice(sindex + start.length, eindex),
+    right: s.slice(eindex + end.length),
   }
 }
