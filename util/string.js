@@ -2,7 +2,8 @@ module.exports = {
   startWith,
   endWith,
   getOverlap,
-  isOverlapBy
+  isOverlapBy,
+  splitBetween,
 };
 
 function startWith(a, b) {
@@ -31,4 +32,21 @@ function getOverlap(a, b) {
 
 function isOverlapBy(a, b, needle) {
   return !!needle && endWith(a, needle) && startWith(b, needle);
+}
+
+/**
+ * splitBetween('abc[eeb]ff', '[', ']');
+ * get:
+ *   {left: 'abc', middle: 'eeb', right: 'ff'}
+ */
+function splitBetween(s, start, end) {
+  var sindex = s.indexOf(start);
+  if (sindex === -1) return '';
+  var eindex = s.indexOf(end);
+  if (eindex === -1) return '';
+  return {
+    left: s.slice(0, sindex),
+    middle: s.slice(sindex + 1, eindex),
+    right: s.slice(eindex + 1),
+  }
 }
