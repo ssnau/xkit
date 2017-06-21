@@ -29,9 +29,9 @@ function co(fn) {
 }
 
 co.wrap = function (obj) {
-  if (isGeneratorFn(obj)) return wrap(obj);
-  if (typeof obj === 'function') return obj;
   if (!obj) return obj;
+  if (isGeneratorFn(obj)) return wrap(obj);
+  if (typeof obj !== 'object') return obj;
 
   const ret = Array.isArray(obj) ? [] : {};
   Object.keys(obj).forEach(k => {
