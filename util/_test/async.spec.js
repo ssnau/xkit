@@ -24,4 +24,37 @@ describe('#async', function () {
     });
   });
 
+  it('should wrap generator function', function () {
+    function* go() {
+      return 1;
+    }
+    return async
+      .wrap(go)()
+      .then(function (v) { return assert.equal(v, 1); });
+  });
+
+  it('should wrap array of generator functions', function () {
+    var fns = [function* go() {
+      return 1;
+    }, function *go2() {
+      return 2;
+    }]
+    return async
+      .wrap(fns[1])()
+      .then(function (v) { return assert.equal(v, 2); });
+  });
+
+  it('should wrap object of generator functions values', function () {
+    var u = {
+      go: function* go() {
+        return this.name;
+      },
+      name: 'haha',
+    };
+    return async
+      .wrap(u)
+      .go()
+      .then(function (v) { return assert.equal(v, 'haha'); });
+  });
+
 });

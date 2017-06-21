@@ -1,4 +1,6 @@
-function async(makeGenerator){
+const isGeneratorFn = require('./is-generator-fn');
+
+function wrap(makeGenerator){
   return function () {
     var generator = makeGenerator.apply(this, arguments);
 
@@ -6,11 +8,12 @@ function async(makeGenerator){
       // result => { done: [Boolean], value: [Object] }
       if (result.done) return Promise.resolve(result.value);
 
-      return Promise.resolve(result.value).then(function (res){
-        return handle(generator.next(res));
-      }, function (err){
-        return generator.throw(err);
-      });
+      return Promise
+        .resolve(result.value)
+        .then(
+          res => handle(generator.next(res)),
+          err => generator.throw(err)
+        );
     }
 
     try {
@@ -22,8 +25,21 @@ function async(makeGenerator){
 }
 
 function co(fn) {
-  return async(fn).apply(this, arguments);
+  return wrap(fn).apply(this, arguments);
 }
-co.wrap = async;
+
+co.wrap = function (obj) {
+  if (isGeneratorFn(obj)) return wrap(obj);
+  if (typeof obj === 'function') return obj;
+  if (!obj) return obj;
+
+  const ret = Array.isArray(obj) ? [] : {};
+  Object.keys(obj).forEach(k => {
+    ret[k] = isGeneratorFn(obj[k]) ? wrap(obj[k]) : obj[k];
+  });
+  return ret;
+};
+
+co.run = co;
 
 module.exports = co;
