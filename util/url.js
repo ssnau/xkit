@@ -14,7 +14,6 @@ function join() {
       continue;
     }
     if (!endWith(url, '/') && !startWith(next, '/')) {
-      console.log('v');
       url = url + '/' + next;
       continue;
     }
