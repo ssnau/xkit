@@ -1,4 +1,4 @@
-var isGeneratorFn = require('./is-generator-fn');
+const isGeneratorFn = require('./is-generator-fn');
 
 function wrap(makeGenerator){
   return function () {
@@ -6,13 +6,13 @@ function wrap(makeGenerator){
 
     function handle(result){
       // result => { done: [Boolean], value: [Object] }
-      if (result.done) { return Promise.resolve(result.value); }
+      if (result.done) return Promise.resolve(result.value);
 
       return Promise
         .resolve(result.value)
         .then(
-          function (res) { return handle(generator.next(res)); },
-          function (err) { return generator.throw(err); }
+          res => handle(generator.next(res)),
+          err => generator.throw(err)
         );
     }
 
@@ -29,12 +29,12 @@ function co(fn) {
 }
 
 co.wrap = function (obj) {
-  if (!obj) { return obj; }
-  if (isGeneratorFn(obj)) { return wrap(obj); }
-  if (typeof obj !== 'object') { return obj; }
+  if (!obj) return obj;
+  if (isGeneratorFn(obj)) return wrap(obj);
+  if (typeof obj !== 'object') return obj;
 
-  var ret = Array.isArray(obj) ? [] : {};
-  Object.keys(obj).forEach(function (k) {
+  const ret = Array.isArray(obj) ? [] : {};
+  Object.keys(obj).forEach(k => {
     ret[k] = isGeneratorFn(obj[k]) ? wrap(obj[k]) : obj[k];
   });
   return ret;

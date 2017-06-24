@@ -45,7 +45,7 @@ function isOverlapBy(a, b, needle) {
 function splitBetween(s, start, end) {
   var sindex = s.indexOf(start);
   if (sindex === -1) return '';
-  var eindex = s.indexOf(end);
+  var eindex = s.indexOf(end, sindex + 1);
   if (eindex === -1) return '';
   return {
     left: s.slice(0, sindex),
