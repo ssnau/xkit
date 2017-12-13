@@ -42,3 +42,11 @@ it('should check overlap', function () {
   assert.equal( string.isOverlapBy('abc/', '/cde', '/'), true);
   assert.equal( string.isOverlapBy('abc/d', '/def', '/d'), true);
 });
+
+it('charToHex', function () {
+  '千呼万唤始出来，犹抱琵琶半遮面。'.split('').forEach(function (c) {
+    var code = string.charToHex(c);
+    var ucode = '"\\u' + code + '"';
+    assert.equal(c, JSON.parse(ucode));
+  });
+});

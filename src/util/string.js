@@ -4,6 +4,7 @@ module.exports = {
   getOverlap,
   isOverlapBy,
   splitBetween,
+  charToHex,
 };
 
 function startWith(a, b) {
@@ -52,4 +53,15 @@ function splitBetween(s, start, end) {
     middle: s.slice(sindex + start.length, eindex),
     right: s.slice(eindex + end.length),
   }
+}
+
+function charToHex(char) {
+  const code = char.charCodeAt(0);
+  const lowerBit = code % Math.pow(2, 8);
+  const higherBit = Math.floor(code / Math.pow(2, 8));
+  const toHex = n => {
+    const hexNum = n.toString(16);
+    return hexNum.length === 2 ? hexNum : ('0' + hexNum);
+  }
+  return `${toHex(higherBit) + toHex(lowerBit)}`;
 }
