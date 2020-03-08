@@ -21,7 +21,7 @@ function endWith(a, b) {
  * input:
  *   a: abcdefg
  *   b: defgxyz
- * output: 
+ * output:
  *   defg
  */
 function getOverlap(a, b) {
@@ -34,6 +34,15 @@ function getOverlap(a, b) {
   return '';
 }
 
+/**
+ * check if the provided two string are overlapped by a string
+ * input:
+ *   a: abcdefg
+ *   b: defgxyz
+ *   needle: defg
+ * output:
+ *   true
+ */
 function isOverlapBy(a, b, needle) {
   return !!needle && endWith(a, needle) && startWith(b, needle);
 }

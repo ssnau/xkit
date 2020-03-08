@@ -10,6 +10,10 @@
   "keywords": [],
   "author": "",
   "license": "ISC",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/ssnau/xkit.git"
+  },
   "devDependencies": {
     "buble": "^0.15.2",
     "co": "^4.6.0",
