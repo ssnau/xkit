@@ -10,7 +10,7 @@ function join() {
     var next = arguments$1[i];
     // both has / at each side
     if (endWith(url, '/') && startWith(next, '/')) {
-      url = url + next.slice(1); 
+      url = url + next.slice(1);
       continue;
     }
     if (!endWith(url, '/') && !startWith(next, '/')) {
@@ -23,5 +23,5 @@ function join() {
 }
 
 module.exports = {
-  join: join, 
+  join: join,
 };
