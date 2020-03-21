@@ -74,3 +74,11 @@ function charToHex(char) {
   }
   return ("" + (toHex(higherBit) + toHex(lowerBit)));
 }
+
+function isEmpty(str) {
+  if (str === undefined || str === null) return true;
+  if (str === '') return true;
+  if (typeof str === 'string' && str.trim() === '') return true;
+  if (typeof str === 'number' && String(str) === 'NaN') return true;
+  return false;
+}
