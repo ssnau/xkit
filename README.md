@@ -1,3 +1,5 @@
+[![huntr](https://cdn.huntr.dev/huntr_security_badge_mono.svg)](https://huntr.dev)
+
 A set of functions __without any dependencies__.
 
 Notice: the primary goal I made this repo is to build small things without any shitty npm dependencies. If it has to depend on them, just copy.
