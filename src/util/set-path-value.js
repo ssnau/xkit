@@ -4,7 +4,7 @@ module.exports = function setPathValue(obj, path, value) {
   let state = obj;
   const last = paths[paths.length - 1];
   for (let i = 0; i < paths.length - 1; i++) {
-    state = state && state[paths[i]];
+    state = state && state[paths[i]] !== Object.prototype && state[paths[i]];
   }
   if (!state) return false;
   if (value !== state[last]) {
